@@ -4,9 +4,9 @@ require File.expand_path('../lib/versioned_seeds/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Simon COURTOIS"]
   gem.email         = ["scourtois@cubyx.fr"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.description   = %q{Manage your seed scripts by versioning them}
+  gem.summary       = %q{Versioned Seeds provides a very simple way to manage your seed scripts by versioning them. It provides rake tasks to load them.}
+  gem.homepage      = "http://github.com/simonc/versioned_seeds"
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")

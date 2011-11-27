@@ -1,0 +1,52 @@
+# Versioned Seeds
+
+Versioned Seeds is an alternative to Rails seeds. It allows to store your seeds in several files and prevent from re-seeding.
+
+Rails seeds are great when you create a project but what about new ones when the project is already running ? When you have to import some data from a CSV file ?
+
+Versioned Seeds provides a simple, conventions based, way to do that.
+
+## Installation
+
+    gem 'versioned_seeds', :require => false
+
+## Usage
+
+You can get the last imported seeds version :
+
+    $ rake vs:status
+    Last seeds: 0
+
+Given two seeds files :
+
+``` ruby
+# db/seeds/001_create_users.rb
+User.create!(:username => 'admin', :password => 'password', :admin => true)
+User.create!(:username => 'user1', :password => 'password')
+
+# db/seeds/002_import_articles.rb
+require 'csv'
+
+CSV.foreach('/some/file.csv') do |line|
+  # ...
+end
+```
+
+You can import only the first one by using the `vs:next` task :
+
+    $ rake vs:next
+    Loading: 001_create_users.rb
+
+    $ rake vs:status
+    Last seeds: 1
+
+Or load all files using the `vs:all` task :
+
+    $ rake vs:all
+    Loading: 001_create_users.rb
+    Loading: 002_import_articles.rb
+    
+    $ rake vs:status
+    Last seeds: 2
+
+Once you're at some version, any file with a version equal or inferior to that version will not be imported next time.
