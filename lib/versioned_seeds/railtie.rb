@@ -1,5 +1,5 @@
-require 'versioned_seeds'
 require 'rails'
+require 'versioned_seeds'
 
 module VersionedSeeds
   class Railtie < Rails::Railtie
