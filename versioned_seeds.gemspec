@@ -14,4 +14,7 @@ Gem::Specification.new do |gem|
   gem.name          = "versioned_seeds"
   gem.require_paths = ["lib"]
   gem.version       = VersionedSeeds::VERSION
+
+  gem.add_development_dependency 'rake', '~> 0.9'
+  gem.add_development_dependency 'rspec', '>= 2'
 end
