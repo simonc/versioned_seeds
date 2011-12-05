@@ -56,6 +56,7 @@ module VersionedSeeds
       }.sort { |seed1, seed2| seed1.version <=> seed2.version }
     end
 
+    # Writes the versions of the loaded script to the .versionned_seeds file
     def write_loaded(loaded)
       if loaded.any?
         File.open(Rails.root + '.versioned_seeds', 'a') do |f|
@@ -66,6 +67,7 @@ module VersionedSeeds
       end
     end
 
+    # Returns the list of already loaded scripts
     def already_loaded
       file = Rails.root + '.versioned_seeds'
       return [0] unless File.exists?(file)
