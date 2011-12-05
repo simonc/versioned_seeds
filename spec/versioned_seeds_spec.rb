@@ -121,9 +121,9 @@ module VersionedSeeds
     end
 
     describe 'already_loaded' do
-      it "should return 0 if the file does not exist" do
+      it "should return [0] if the file does not exist" do
         remove_seed_file
-        @tester.already_loaded.should == 0
+        @tester.already_loaded.should == [0]
       end
 
       it "should return the list of already loaded scripts" do

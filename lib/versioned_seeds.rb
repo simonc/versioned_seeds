@@ -68,7 +68,7 @@ module VersionedSeeds
 
     def already_loaded
       file = Rails.root + '.versioned_seeds'
-      return 0 unless File.exists?(file)
+      return [0] unless File.exists?(file)
       File.read(file).split(/\r?\n/)
     end
   end
