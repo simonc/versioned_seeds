@@ -8,23 +8,40 @@ Versioned Seeds provides a simple, conventions based, way to do that.
 
 ## Installation
 
+Add this line to your `Gemfile` :
+
     gem 'versioned_seeds', :require => false
 
+If you're using Git, as you should, be sure to call this in your shell :
+
+    $ echo ".versionned_seeds" >> .gitignore
+
 ## Usage
+
+### Get current version
 
 You can get the last imported seeds version :
 
     $ rake vs:status
     Last seeds: 0
 
+### Generate a seeding script
+
+The generator will simply generate a timestamped file where you can put anything you want :
+
+    $ rails g versioned_seeds:seed_file some_seeding_script
+          create  db/seeds/20111205155806_some_seeding_script.rb
+
+### Loading the scripts
+
 Given two seeds files :
 
 ``` ruby
-# db/seeds/001_create_users.rb
+# db/seeds/20111205155801_create_users.rb
 User.create!(:username => 'admin', :password => 'password', :admin => true)
 User.create!(:username => 'user1', :password => 'password')
 
-# db/seeds/002_import_articles.rb
+# db/seeds/20111205155802_import_articles.rb
 require 'csv'
 
 CSV.foreach('/some/file.csv') do |line|
@@ -35,18 +52,18 @@ end
 You can import only the first one by using the `vs:next` task :
 
     $ rake vs:next
-    Loading: 001_create_users.rb
+    Loading: 20111205155801_create_users.rb
 
     $ rake vs:status
-    Last seeds: 1
+    Last seeds: 20111205155801
 
 Or load all files using the `vs:all` task :
 
     $ rake vs:all
-    Loading: 001_create_users.rb
-    Loading: 002_import_articles.rb
+    Loading: 20111205155801_create_users.rb
+    Loading: 20111205155802_import_articles.rb
     
     $ rake vs:status
-    Last seeds: 2
+    Last seeds: 20111205155802
 
 Once you're at some version, any file with a version equal or inferior to that version will not be imported next time.
