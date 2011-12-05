@@ -1,4 +1,4 @@
-# Versioned Seeds [![Build Status](https://secure.travis-ci.org/[YOUR_GITHUB_USERNAME]/[YOUR_PROJECT_NAME].png)](http://travis-ci.org/[YOUR_GITHUB_USERNAME]/[YOUR_PROJECT_NAME])
+# Versioned Seeds [![Build Status](https://secure.travis-ci.org/simonc/versioned_seeds.png)](http://travis-ci.org/simonc/versioned_seeds)
 
 Versioned Seeds is an alternative to Rails seeds. It allows to store your seeds in several files and prevent from re-seeding.
 
