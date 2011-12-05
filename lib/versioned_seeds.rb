@@ -22,7 +22,7 @@ module VersionedSeeds
 
     # Returns all the seeding scripts to load
     def all_seeds(loaded=already_loaded)
-      seeds.delete_if { |seed| loaded.include?(seed) }
+      seeds.delete_if { |seed| loaded.include?(seed.version) }
     end
 
     # returns the last loaded seeding script

@@ -42,26 +42,26 @@ module VersionedSeeds
       describe 'next' do
         it "should load the next seeding script" do
           @tester.should_receive(:load).with(file2)
-          @tester.next([file1])
+          @tester.next([file1.version])
         end
       end
 
       describe 'all' do
         it "should load all the seeding scripts that haven't been loaded yet" do
           @tester.should_receive(:load).with([file2, file3])
-          @tester.all([file1])
+          @tester.all([file1.version])
         end
       end
 
       describe 'next_seed' do
         it "should return the next seeding script to load" do
-          @tester.next_seed([file1]).should == file2
+          @tester.next_seed([file1.version]).should == file2
         end
       end
 
       describe 'all_seeds' do
         it "should return all the seeding scripts to load" do
-          @tester.all_seeds([file1]).should == [file2, file3]
+          @tester.all_seeds([file1.version]).should == [file2, file3]
         end
       end
 
