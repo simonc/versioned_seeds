@@ -66,4 +66,4 @@ Or load all files using the `vs:all` task :
     $ rake vs:status
     Last seeds: 20111205155802
 
-Once you're at some version, any file with a version equal or inferior to that version will not be imported next time.
+Every script imported once will never be loaded again.
