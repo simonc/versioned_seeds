@@ -5,6 +5,10 @@ module VersionedSeeds
   require "versioned_seeds/railtie" if defined?(Rails)
 
   module ClassMethods # :nodoc:
+    def configure
+      yield self
+    end
+
     # Loads the next seeding script
     def next(loaded=already_loaded)
       load next_seed(loaded)
@@ -43,9 +47,9 @@ module VersionedSeeds
       write_loaded loaded
     end
 
-    # Returns the files located in the rails_root/db/seeds folder sorted by version
+    # Returns the files located in the <root_path>/db/seeds folder sorted by version
     def seeds
-      Dir[Rails.root + 'db/seeds/*.rb'].inject([]) { |list, file|
+      Dir[root_path + 'db/seeds/*.rb'].inject([]) { |list, file|
         filename = File.basename(file)
         version  = filename[/^(\d+)_/, 1]
 
@@ -59,7 +63,7 @@ module VersionedSeeds
     # Writes the versions of the loaded script to the .versionned_seeds file
     def write_loaded(loaded)
       if loaded.any?
-        File.open(Rails.root + '.versioned_seeds', 'a') do |f|
+        File.open(root_path + '.versioned_seeds', 'a') do |f|
           loaded.each { |seed| f.puts seed.version }
         end
       else
@@ -69,9 +73,23 @@ module VersionedSeeds
 
     # Returns the list of already loaded scripts
     def already_loaded
-      file = Rails.root + '.versioned_seeds'
+      file = root_path + '.versioned_seeds'
       return [0] unless File.exists?(file)
       File.read(file).split(/\r?\n/)
+    end
+
+    def root_path
+      @root_path ||= Rails.root if defined?(Rails)
+      return @root_path if @root_path
+      raise "VersionedSeeds.root_path is not set.\n"      \
+            "VersionedSeeds.configure do |config|\n"      \
+            "  config.root_path = '/root/of/your/app/'\n" \
+            "end"
+    end
+
+    def root_path=(path)
+      @root_path = path
+      @root_path += '/' unless @root_path.end_with?('/')
     end
   end
 
