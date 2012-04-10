@@ -82,7 +82,7 @@ module VersionedSeeds
 
     def root_path=(path)
       @root_path = path
-      @root_path += '/' unless @root_path.end_with?('/')
+      @root_path += '/' unless @root_path.nil? || @root_path.end_with?('/')
     end
   end
 
