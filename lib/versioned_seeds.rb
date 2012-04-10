@@ -37,14 +37,11 @@ module VersionedSeeds
     # Loads a list of seeding scripts and updates the .versioned_seeds file
     def load(seeds)
       seeds = [*seeds]
-      loaded = seeds.inject([]) do |ary, seed|
+      seeds.each do |seed|
         puts "Loading: #{File.basename seed.file}"
         require seed.file
-        ary << seed
-        ary
+        write_loaded seed
       end
-
-      write_loaded loaded
     end
 
     # Returns the files located in the <root_path>/db/seeds folder sorted by version
@@ -62,12 +59,8 @@ module VersionedSeeds
 
     # Writes the versions of the loaded script to the .versionned_seeds file
     def write_loaded(loaded)
-      if loaded.any?
-        File.open(root_path + '.versioned_seeds', 'a') do |f|
-          loaded.each { |seed| f.puts seed.version }
-        end
-      else
-        puts "No seed has been loaded"
+      File.open(root_path + '.versioned_seeds', 'a') do |f|
+        loaded.each { |seed| f.puts seed.version }
       end
     end
 
