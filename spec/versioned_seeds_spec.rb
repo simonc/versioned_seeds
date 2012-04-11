@@ -111,12 +111,12 @@ module VersionedSeeds
     end
 
     describe 'write_loaded' do
-      it "should write the versions of the loaded scripts to the .versioned_seeds file" do
+      it "should write the versions of the loaded script to the .versioned_seeds file" do
         seed_file = remove_seed_file
         file = mock('file')
         File.should_receive(:open).with(seed_file, 'a').and_yield(file)
         file.should_receive(:puts).with(file1.version.to_s)
-        @tester.write_loaded [file1]
+        @tester.write_loaded file1
       end
     end
 
