@@ -36,8 +36,7 @@ module VersionedSeeds
 
     # Loads a list of seeding scripts and updates the .versioned_seeds file
     def load(seeds)
-      seeds = [*seeds]
-      seeds.each do |seed|
+      [*seeds].each do |seed|
         puts "Loading: #{File.basename seed.file}"
         require seed.file
         write_loaded seed
@@ -60,7 +59,7 @@ module VersionedSeeds
     # Writes the versions of the loaded script to the .versionned_seeds file
     def write_loaded(loaded)
       File.open(root_path + '.versioned_seeds', 'a') do |f|
-        loaded.each { |seed| f.puts seed.version }
+        f.puts loaded.version
       end
     end
 
