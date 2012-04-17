@@ -102,6 +102,11 @@ module VersionedSeeds
         @tester.should_receive(:write_loaded)
         @tester.load file1
       end
+
+      it "should not write the loaded scripts to .versioned_file if write is false" do
+        @tester.should_not_receive(:write_loaded)
+        @tester.load file1, false
+      end
     end
 
     describe 'seeds' do

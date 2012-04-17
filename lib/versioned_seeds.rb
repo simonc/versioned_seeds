@@ -35,11 +35,11 @@ module VersionedSeeds
     end
 
     # Loads a list of seeding scripts and updates the .versioned_seeds file
-    def load(seeds)
+    def load(seeds, write=true)
       [*seeds].each do |seed|
         puts "Loading: #{File.basename seed.file}"
         require seed.file
-        write_loaded seed
+        write_loaded seed if write
       end
     end
 
