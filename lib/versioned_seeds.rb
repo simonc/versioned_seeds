@@ -9,6 +9,12 @@ module VersionedSeeds
       yield self
     end
 
+    # Loads seeding script with the given version
+    def load_one(version)
+      seed = all_seeds([]).select { |seed| seed.version == version }.first
+      load seed, false
+    end
+
     # Loads the next seeding script
     def next(loaded=already_loaded)
       load next_seed(loaded)
