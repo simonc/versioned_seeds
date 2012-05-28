@@ -5,7 +5,7 @@ module VersionedSeeds
         sql_file    = VersionedSeeds.root_path + 'db/seeds/' + path
         db_password = db_config['password']
 
-        system "RAILS_ENV=#{Rails.env} bundle exec rails dbconsole -p #{db_password} < #{sql_file}"
+        system "RAILS_ENV='#{Rails.env}' bundle exec rails dbconsole -p '#{db_password}' < '#{sql_file}'"
       end
 
       def self.db_config
