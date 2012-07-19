@@ -10,7 +10,7 @@ Versioned Seeds provides a simple, conventions based, way to do that.
 
 Add this line to your `Gemfile` :
 
-    gem 'versioned_seeds', :require => false
+    gem 'versioned_seeds'
 
 If you're using Git, as you should, be sure to call this in your shell :
 
