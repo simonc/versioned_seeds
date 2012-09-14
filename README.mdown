@@ -25,6 +25,23 @@ You can get the last imported seeds version :
     $ rake vs:status
     Last seeds: 0
 
+### Configuration
+
+VersionedSeeds can be configured using an initializer:
+
+``` ruby
+VersionedSeeds.configuration do |config|
+  # Path where are stored seed files
+  # VersionedSeeds will look for [root_path]/db/seeds/*.rb
+  # Defaults to Rails.root
+  config.root_path = '...'
+
+  # Path of the .versioned_seeds file where the list of
+  # already loaded seed files is stored
+  config.list_path = '...' #
+end
+```
+
 ### Generate a seeding script
 
 The generator will simply generate a timestamped file where you can put anything you want :

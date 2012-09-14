@@ -64,16 +64,15 @@ module VersionedSeeds
 
     # Writes the versions of the loaded script to the .versionned_seeds file
     def write_loaded(loaded)
-      File.open(root_path + '.versioned_seeds', 'a') do |f|
+      File.open(list_path, 'a') do |f|
         f.puts loaded.version
       end
     end
 
     # Returns the list of already loaded scripts
     def already_loaded
-      file = root_path + '.versioned_seeds'
-      return [0] unless File.exists?(file)
-      File.read(file).split(/\r?\n/)
+      return [0] unless File.exists?(list_path)
+      File.read(list_path).split(/\r?\n/)
     end
 
     def root_path
@@ -88,6 +87,14 @@ module VersionedSeeds
     def root_path=(path)
       @root_path = path
       @root_path += '/' unless @root_path.nil? || @root_path.end_with?('/')
+    end
+
+    def list_path
+      @list_path ||= root_path + '.versioned_seeds'
+    end
+
+    def list_path=(path)
+      @list_path = path
     end
   end
 
