@@ -1,3 +1,7 @@
+# Project not maintained!
+
+**Versioned Seeds is not maintained anymore. Take a look at [seed_migration](https://github.com/harrystech/seed_migration) instead ;)**
+
 # Versioned Seeds [![Build Status](https://secure.travis-ci.org/simonc/versioned_seeds.png)](http://travis-ci.org/simonc/versioned_seeds)
 
 Versioned Seeds is an alternative to Rails seeds. It allows to store your seeds in several files and prevent from re-seeding.
